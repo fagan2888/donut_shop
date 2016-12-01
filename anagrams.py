@@ -29,7 +29,7 @@ def online(ana_dict):
                 print(new_word)
                 ana_dict[key] = new_word
             else:
-                print(value)                
+                print(value)
         else:
             print("-")
 
