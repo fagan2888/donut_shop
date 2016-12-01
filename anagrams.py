@@ -19,12 +19,9 @@ class dict_hash:
 def online(ana_dict):
     while True:
         word = input("")
-        #key = tuple(sorted(list(word)))
         key = dict_hash(word)
         if key in ana_dict:
-            list_of_anagrams = ana_dict[key]
-            list_of_anagrams.sort()
-            print(" ".join(w for w in list_of_anagrams))
+            print(ana_dict[key])
         else:
             print("-")
 
@@ -33,22 +30,8 @@ def offline():
         raise Exception("ERROR, wrong amount of arguments")
     path_to_dict = sys.argv[1]
     ana_dict = make_anagram_dict(path_to_dict)
-    # for key in ana_dict:
-    #     print(key.letter_to_occurances)
     online(ana_dict)
 
-
-# def make_anagram_dict(word_list):
-#     ana_dict = {}
-#     for word in word_list:
-#         #key = tuple(sorted(list(word)))
-#         key = dict_hash(word)
-#         if key in ana_dict:
-#             list_of_anagrams = ana_dict[key]
-#             list_of_anagrams.append(word)
-#         else:
-#             ana_dict[key] = [word]
-#     return ana_dict
 
 def make_anagram_dict(path_to_dict):
     f = open(path_to_dict, 'r')
@@ -61,14 +44,11 @@ def make_anagram_dict(path_to_dict):
             list_of_anagrams.append(word)
         else:
             ana_dict[key] = [word]
-    return ana_dict
-
-# def make_list(path_to_dict):
-#     f = open(path_to_dict, 'r')
-#     lst = []
-#     for line in f:
-#         lst.append(str(line).strip())
-#     return lst
+    better_ana_dict = {}
+    for k, lst in ana_dict.items():
+        lst.sort()
+        better_ana_dict[k] = " ".join(w for w in lst)
+    return better_ana_dict
 
 if __name__ == '__main__':
     offline()
