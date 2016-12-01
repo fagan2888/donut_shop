@@ -20,8 +20,16 @@ def online(ana_dict):
     while True:
         word = input("")
         key = dict_hash(word)
+        new_word = None
         if key in ana_dict:
-            print(ana_dict[key])
+            value = ana_dict[key]
+            if isinstance(value, list):
+                value.sort()
+                new_word = " ".join(w for w in value)
+                print(new_word)
+                ana_dict[key] = new_word
+            else:
+                print(value)                
         else:
             print("-")
 
@@ -44,11 +52,7 @@ def make_anagram_dict(path_to_dict):
             list_of_anagrams.append(word)
         else:
             ana_dict[key] = [word]
-    better_ana_dict = {}
-    for k, lst in ana_dict.items():
-        lst.sort()
-        better_ana_dict[k] = " ".join(w for w in lst)
-    return better_ana_dict
+    return ana_dict
 
 if __name__ == '__main__':
     offline()
