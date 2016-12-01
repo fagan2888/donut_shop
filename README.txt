@@ -18,4 +18,6 @@
     Let N be the number of words in the specified text file and let L be the length of the longest word in the text. Then our memory scales at O(NL) because we could in the worst case keep all the words in the dictionary.
 
   3.
-    Naive solution: iterate through the entire dictionary upon every request; only store the strings that are anagrams to the input string. Would take O(Q) space but at the cost of iterating through all one million words.
+    Naive solution: iterate through the entire dictionary upon every request; only store the strings that are anagrams to the input string. Would take O(Q) space but at the cost of iterating through all one million words and basically do the offline step each time. O(K + NL + QlogQ) running time.
+
+    If the number of sets of anagrams can be stored in less than 2MB, then you could feasibly store each set, that way you can check to see if a word has an anagram in the list. If it does, then you can iterate through the one million words. This doesn't change the asymptotic runtime, but under certain use cases it could be faster.
